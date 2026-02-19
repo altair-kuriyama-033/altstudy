@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%= chapter.title %> - 問題</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <main class="container">
+      <h1><%= chapter.title %> の問題</h1>
+      <form method="post" action="/chapters/<%= chapter.id %>/quiz" class="card">
+        <% questions.forEach((question, index) => { %>
+          <fieldset>
+            <legend>Q<%= index + 1 %>: <%= question.questionText %></legend>
+            <% question.choices.forEach((choice) => { %>
+              <label class="radio">
+                <input type="radio" name="answers[<%= question.questionId %>]" value="<%= choice.choiceKey %>" required />
+                <%= choice.choiceKey %>. <%= choice.choiceText %>
+              </label>
+            <% }) %>
+          </fieldset>
+        <% }) %>
+        <button type="submit">採点してランキングに反映</button>
+      </form>
+    </main>
+  </body>
+</html>
