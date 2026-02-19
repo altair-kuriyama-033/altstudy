@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>章一覧</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <main class="container">
+      <header class="row">
+        <h1>章一覧</h1>
+        <div class="row gap">
+          <a href="/chapters/new" class="button">章を作成</a>
+          <form method="post" action="/logout">
+            <button type="submit" class="danger">ログアウト</button>
+          </form>
+        </div>
+      </header>
+
+      <div class="grid">
+        <% chapters.forEach((chapter) => { %>
+          <section class="card">
+            <h2><%= chapter.title %></h2>
+            <p><%= chapter.description || '説明なし' %></p>
+            <div class="row gap">
+              <a href="/chapters/<%= chapter.id %>/quiz" class="button">問題を解く</a>
+              <a href="/chapters/<%= chapter.id %>/ranking" class="button secondary">ランキング</a>
+            </div>
+          </section>
+        <% }) %>
+      </div>
+    </main>
+  </body>
+</html>
